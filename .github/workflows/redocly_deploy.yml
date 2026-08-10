@@ -1,0 +1,46 @@
+name: Deploy Redocly documentation
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - redocly-docs/**
+      - .github/workflows/redocly_deploy.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: redocly-documentation-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Publish redocly-docs to redocly-deploy
+    runs-on: ubuntu-latest
+    env:
+      REDOCLY_COMMIT_AUTHOR_NAME: desenvolvedor2
+      REDOCLY_COMMIT_AUTHOR_EMAIL: desenvolvedor@netcredbrasil.com.br
+
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+
+      - name: Validate deployment identity
+        run: |
+          if [ -z "${REDOCLY_COMMIT_AUTHOR_NAME}" ] || [ -z "${REDOCLY_COMMIT_AUTHOR_EMAIL}" ]; then
+            echo "Configure the REDOCLY_COMMIT_AUTHOR_NAME and REDOCLY_COMMIT_AUTHOR_EMAIL repository variables."
+            exit 1
+          fi
+
+      - name: Publish complete documentation project
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
+        with:
+          branch: redocly-deploy
+          folder: redocly-docs
+          clean: true
+          git-config-name: ${{ env.REDOCLY_COMMIT_AUTHOR_NAME }}
+          git-config-email: ${{ env.REDOCLY_COMMIT_AUTHOR_EMAIL }}
+          commit-message: Deploy Redocly documentation from ${{ github.sha }}
