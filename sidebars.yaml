@@ -1,0 +1,47 @@
+- page: index.md
+  label: Inicio
+- page: docs/index.md
+  label: Visao geral
+- group: Por onde comecar
+  expanded: true
+  items:
+    - page: docs/por-onde-comecar/index.md
+      label: Guia inicial
+    - page: docs/por-onde-comecar/conceitos-de-graphql.md
+      label: Conceitos de GraphQL
+- page: docs/autenticacao/index.md
+  label: Autenticacao
+- group: Webhook
+  expanded: true
+  items:
+    - page: docs/webhook/index.md
+      label: Visao geral
+    - page: openapi/webhooks.yaml
+      label: Referencia REST
+    - group: Requisicoes enviadas
+      expanded: true
+      items:
+        - page: docs/webhook/requisicoes-enviadas/index.md
+          label: Introducao
+        - group: Formatos
+          expanded: true
+          items:
+            - page: docs/webhook/requisicoes-enviadas/formatos/index.md
+              label: Visao geral
+            - page: docs/webhook/requisicoes-enviadas/formatos/charge.md
+              label: Charge
+            - page: docs/webhook/requisicoes-enviadas/formatos/paymentprofile.md
+              label: PaymentProfile
+            - page: docs/webhook/requisicoes-enviadas/formatos/payout.md
+              label: Payout
+            - page: docs/webhook/requisicoes-enviadas/formatos/registrationprocess.md
+              label: RegistrationProcess
+            - page: docs/webhook/requisicoes-enviadas/formatos/transaction.md
+              label: Transaction
+- group: Referencia da API
+  expanded: true
+  items:
+    - page: openapi/openapi.yaml
+      label: OpenAPI completo
+    - page: openapi/company.yaml
+      label: Company
